@@ -9,7 +9,7 @@ import time
 
 st.set_page_config(page_title="BSDK SOJAYA KAR", layout="wide")
 
-# Loading screen with centered animation and random fact
+
 def show_loading_screen():
     random_facts = [
         "Soke dekh bhai ache sapne bhi aate hai",
@@ -54,9 +54,9 @@ for i in range(7):
     sleep = st.sidebar.number_input(f"Hours Slept on {day}", min_value=0.0, max_value=12.0, step=0.5, key=f"day_{i}")
     sleep_hours.append(sleep)
 
-# Convert to DataFrame
+
 df = pd.DataFrame({"Day": [(datetime.today() - timedelta(days=i)).strftime("%A") for i in range(7)], "Sleep Hours": sleep_hours})
-recommended_hours = 8  # Ideal sleep per day
+recommended_hours = 8  
 df["Sleep Deficit"] = recommended_hours - df["Sleep Hours"]
 
 st.subheader("📅 Your Weekly Sleep Pattern")
@@ -65,40 +65,40 @@ st.dataframe(df)
 fig = px.line(df, x="Day", y="Sleep Hours", title="Your Sleep Trend (Last 7 Days)", markers=True)
 st.plotly_chart(fig)
 
-# 🧮 Calculate Sleep Deficit
+
 total_deficit = df["Sleep Deficit"].sum()
-st.subheader(f"⚠️ Total Sleep Debt: {total_deficit:.1f} hours")
+st.subheader(f" Total Sleep Debt: {total_deficit:.1f} hours")
 
-# 🛑 Cognitive Impairment Estimation
-reaction_time_increase = total_deficit * 5  # Approximate impact per hour lost
-productivity_drop = min(total_deficit * 3, 100)  # Max drop is 100%
 
-st.subheader("🧠 Estimated Impact on Cognitive Performance")
-st.write(f"⏳ **Reaction Time Delay:** +{reaction_time_increase:.1f}%")
-st.write(f"📉 **Productivity Drop:** {productivity_drop:.1f}%")
+reaction_time_increase = total_deficit * 5  
+productivity_drop = min(total_deficit * 3, 100)  
 
-# 🔮 Machine Learning: Predict Fatigue Level
+st.subheader(" Estimated Impact on Cognitive Performance")
+st.write(f" **Reaction Time Delay:** +{reaction_time_increase:.1f}%")
+st.write(f" **Productivity Drop:** {productivity_drop:.1f}%")
+
+
 if sum(sleep_hours) > 0:
-    X = np.array([[i] for i in range(1, 11)])  # Sleep hours 1 to 10
-    y = np.array([90, 85, 75, 60, 50, 40, 30, 20, 10, 5])  # Fatigue risk levels
+    X = np.array([[i] for i in range(1, 11)]) 
+    y = np.array([90, 85, 75, 60, 50, 40, 30, 20, 10, 5])  
 
     model = LinearRegression()
     model.fit(X, y)
     predicted_fatigue = model.predict(np.array([[sum(sleep_hours) / 7]]))[0]
 
-    st.subheader("🔮 Predicted Fatigue Risk")
+    st.subheader(" Predicted Fatigue Risk")
     st.progress(int(predicted_fatigue))
-    st.write(f"⚡ **Your Fatigue Risk Level:** {predicted_fatigue:.1f}%")
+    st.write(f" **Your Fatigue Risk Level:** {predicted_fatigue:.1f}%")
 else:
-    st.subheader("🔮 Predicted Fatigue Risk")
-    st.write("⚡ Enter sleep data to calculate fatigue risk.")
+    st.subheader(" Predicted Fatigue Risk")
+    st.write(" Enter sleep data to calculate fatigue risk.")
 
 if total_deficit > 0:
     st.subheader("🌙 Recommended Sleep Recovery Plan")
-    recovery_hours = total_deficit / 3  # Suggest recovering over 3 days
-    st.write(f"✅ Try sleeping **{recommended_hours + recovery_hours:.1f} hours** per night for the next 3 days to recover.")
+    recovery_hours = total_deficit / 3  
+    st.write(f"Try sleeping **{recommended_hours + recovery_hours:.1f} hours** per night for the next 3 days to recover.")
 
-# 🎡 Enhanced Spin-the-Wheel Challenge for Sleep Debt
+
 challenges = [
     "Do 10 minutes of stretching before bed",
     "Try 5 minutes of deep breathing meditation",
