@@ -1,4 +1,5 @@
-## How to Run 🚀
+## How to Run 
+
 
 1. Clone this repo:
 git clone https://github.com/yourusername/sleep-tracker.git
