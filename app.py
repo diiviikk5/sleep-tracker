@@ -11,9 +11,7 @@ from streamlit_extras.metric_cards import style_metric_cards
 
 st.set_page_config(page_title="🧠 SOJA BHAI", layout="wide", initial_sidebar_state="expanded")
 
-# ========================
-# 🌀 Show loading screen only once per session
-# ========================
+ 
 if 'loaded' not in st.session_state:
     def show_loading_screen():
         random_facts = [
@@ -28,7 +26,7 @@ if 'loaded' not in st.session_state:
         progress_bar = st.progress(0)
 
         with loading_placeholder.container():
-            st.image("image.png", width=150)  # Example image (put sleepbot.png in same folder)
+            st.image("image.png", width=150)  
             st.markdown(
                 f"""
                 <div style="text-align: center; font-size: 36px; font-weight: bold; margin-top: 2vh; color: cyan;">
@@ -51,15 +49,11 @@ if 'loaded' not in st.session_state:
     show_loading_screen()
     st.session_state.loaded = True
 
-# ========================
-# 🌌 Main Title + Header Art
-# ========================
-colored_header("Welcome to SOJA BHAI", description="Track. Analyze. Optimize.", color_name="violet-70")
-st.image("2.png", use_container_width=True)  # Example background image (put nightsky.png in same folder)
 
-# ========================
-# 🧾 Input Section
-# ========================
+colored_header("Welcome to SOJA BHAI", description="Track. Analyze. Optimize.", color_name="violet-70")
+st.image("2.png", use_container_width=True) 
+
+
 st.sidebar.title("🛌 Enter Your Sleep Data")
 sleep_hours = []
 
@@ -68,9 +62,7 @@ for i in range(7):
     sleep = st.sidebar.slider(f"Hours Slept on {day}", min_value=0.0, max_value=12.0, step=0.5, key=f"day_{i}")
     sleep_hours.append(sleep)
 
-# ========================
-# 📊 Data & Metrics
-# ========================
+
 df = pd.DataFrame({
     "Day": [(datetime.today() - timedelta(days=i)).strftime("%A") for i in range(7)],
     "Sleep Hours": sleep_hours
@@ -82,9 +74,7 @@ total_deficit = df["Sleep Deficit"].sum()
 total_sleep = sum(sleep_hours)
 fatigue_risk = 0
 
-# ========================
-# 🧠 AI Fatigue Prediction
-# ========================
+
 if total_sleep > 0:
     model = LinearRegression()
     X = np.array([[i] for i in range(1, 11)])
@@ -92,9 +82,7 @@ if total_sleep > 0:
     model.fit(X, y)
     fatigue_risk = model.predict(np.array([[total_sleep / 7]]))[0]
 
-# ========================
-# 📈 Visualizations
-# ========================
+
 with st.container():
     st.markdown("## 🔍 Weekly Sleep Analysis")
     col1, col2, col3 = st.columns(3)
@@ -108,9 +96,7 @@ with st.container():
     st.plotly_chart(px.line(df, x="Day", y="Sleep Hours", title="🌙 Sleep Pattern (Last 7 Days)", markers=True))
     st.dataframe(df, use_container_width=True)
 
-# ========================
-# 🧠 Performance Impact
-# ========================
+
 reaction_time_increase = total_deficit * 5
 productivity_drop = min(total_deficit * 3, 100)
 
@@ -119,17 +105,13 @@ col4, col5 = st.columns(2)
 col4.success(f"⏳ Reaction Time Delay: +{reaction_time_increase:.1f}%")
 col5.error(f"📉 Productivity Drop: {productivity_drop:.1f}%")
 
-# ========================
-# 🌙 Recovery Plan
-# ========================
+
 if total_deficit > 0:
     st.markdown("## 🌌 Recovery Plan")
     recovery_hours = total_deficit / 3
     st.info(f"For the next 3 nights, try sleeping **{recommended_hours + recovery_hours:.1f} hours** each night.")
 
-# ========================
-# 🎡 Daily Challenge Spinner
-# ========================
+
 challenges = [
     "Do 10 minutes of stretching before bed",
     "Try 5 minutes of deep breathing meditation",
@@ -155,10 +137,8 @@ if total_deficit > 0:
     if st.button("🎡 Spin the Challenge Wheel"):
         challenge = spin_wheel()
         st.success(f"Your Challenge: {challenge}")
-        st.image("1.png", width=400)  # Optional image for extra vibe (put challenge.png in same folder)
+        st.image("1.png", width=400)  
 
-# ========================
-# ✅ Outro
-# ========================
+
 st.markdown("---")
 st.success("🔋 Consistent sleep = Consistent energy. You’re on the path to mastery!")
