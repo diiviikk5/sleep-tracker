@@ -18,7 +18,6 @@ if 'loaded' not in st.session_state:
             "😴 Soke dekh bhai ache sapne bhi aate hai",
             "🚫 Pura din bhi nahi sona chaiye",
             "📚 Exam me bina soye jayega to ache se lag jayenge",
-            "💖 Kisi din uske saath bhi soyega",
             "📖 Ek din pehle padhne ke liye Neend mat kharab kar"
         ]
         fact = random.choice(random_facts)
