@@ -1,0 +1,40 @@
+/* Import Orbitron font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #121212;  /* Example dark theme background */
+    color: #ffffff;  /* Text color */
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+    color: #e6e6e6;
+}
+
+p, span, div, a, li {
+    font-family: 'Orbitron', sans-serif;
+    color: #bbb;
+}
+
+button, .stButton>button {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover, .stButton>button:hover {
+    background-color: #004999;
+}
