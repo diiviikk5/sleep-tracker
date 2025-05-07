@@ -1,6 +1,93 @@
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .orbitron-banner {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .orbitron-title {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        .orbitron-subtitle {
+            font-size: 1.5em;
+            color: cyan;
+        }
+        #clock {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        #greet-btn {
+            background-color: #1DB954;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            color: white;
+        }
+        #greet-msg {
+            margin-top: 15px;
+            font-size: 1.2em;
+            color: lightgreen;
+        }
+    </style>
+</head>
+<body>
 
 <div class="orbitron-banner">
-  <h1 class="orbitron-title">SOJA BHAI 🧠</h1>
-  <p class="orbitron-subtitle">Sleep Tracker • Fatigue Monitor • Performance Booster</p>
+    <h1 class="orbitron-title">SOJA BHAI 🧠</h1>
+    <p class="orbitron-subtitle" id="typewriter"></p>
 </div>
+
+<div id="clock"></div>
+
+<button id="greet-btn">Greet Me!</button>
+<p id="greet-msg"></p>
+
+<script>
+    // Typewriter Effect
+    const text = "Sleep Tracker • Fatigue Monitor • Performance Booster";
+    let index = 0;
+    const speed = 75;
+
+    function typeWriter() {
+        if (index < text.length) {
+            document.getElementById("typewriter").innerHTML += text.charAt(index);
+            index++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+    typeWriter();
+
+    // Real-Time Clock
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        document.getElementById('clock').innerText = "Current Time: " + timeString;
+    }
+    setInterval(updateTime, 1000);
+
+    // Button Greeting
+    document.getElementById('greet-btn').addEventListener('click', () => {
+        document.getElementById('greet-msg').innerText = "Hello, Sleep Champion! 🛌";
+    });
+</script>
+
+</body>
+</html>""

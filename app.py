@@ -7,25 +7,20 @@ from sklearn.linear_model import LinearRegression
 import random
 import time
 import os
+import streamlit.components.v1 as components
 
 # Set page config
 st.set_page_config(page_title="🧠 SOJA BHAI", layout="wide", initial_sidebar_state="expanded")
 
-# Load HTML and CSS (no JS needed)
+# Load HTML and CSS with full JS support
 def load_assets():
     try:
         with open(os.path.join('assets', 'index.html'), 'r', encoding='utf-8') as f:
             html_content = f.read()
-        st.markdown(html_content, unsafe_allow_html=True)
+        # Render the full HTML with JS
+        components.html(html_content, height=600)
     except Exception as e:
         st.error(f"Error loading HTML: {e}")
-    
-    try:
-        with open(os.path.join('assets', 'styles.css'), 'r', encoding='utf-8') as f:
-            css_content = f.read()
-        st.markdown(f'<style>{css_content}</style>', unsafe_allow_html=True)
-    except Exception as e:
-        st.error(f"Error loading CSS: {e}")
 
 # Custom Python loading screen (works in Streamlit)
 if 'loaded' not in st.session_state:
