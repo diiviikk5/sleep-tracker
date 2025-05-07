@@ -1,4 +1,4 @@
-""<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,6 +14,7 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
+            overflow: hidden;
         }
         .orbitron-banner {
             text-align: center;
@@ -40,17 +41,44 @@
             border-radius: 5px;
             margin-top: 10px;
             color: white;
+            transition: background-color 0.3s ease;
+        }
+        #greet-btn:hover {
+            background-color: #17a34a;
         }
         #greet-msg {
             margin-top: 15px;
             font-size: 1.2em;
             color: lightgreen;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        /* Loader Styles */
+        #loader {
+            border: 5px solid #1DB954;
+            border-top: 5px solid cyan;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Hide loader after content is ready */
+        #loader.hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-<div class="orbitron-banner">
+<!-- Loader -->
+<div id="loader"></div>
+
+<div class="orbitron-banner" id="content" style="display: none;">
     <h1 class="orbitron-title">SOJA BHAI 🧠</h1>
     <p class="orbitron-subtitle" id="typewriter"></p>
 </div>
@@ -61,6 +89,12 @@
 <p id="greet-msg"></p>
 
 <script>
+    // Show loader until the content is ready
+    window.onload = () => {
+        document.getElementById("loader").classList.add("hidden");
+        document.getElementById("content").style.display = "block";
+    };
+
     // Typewriter Effect
     const text = "Sleep Tracker • Fatigue Monitor • Performance Booster";
     let index = 0;
@@ -85,9 +119,11 @@
 
     // Button Greeting
     document.getElementById('greet-btn').addEventListener('click', () => {
-        document.getElementById('greet-msg').innerText = "Arrey Ab so bhi ja mere bhai ! 🛌";
+        const msg = document.getElementById('greet-msg');
+        msg.innerText = "Arrey Ab so bhi ja mere bhai ! 🛌";
+        msg.style.opacity = 1; // Smooth fade-in
     });
 </script>
 
 </body>
-</html>""
+</html>
