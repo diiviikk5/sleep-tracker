@@ -32,20 +32,6 @@
             font-size: 1.2em;
             margin-bottom: 15px;
         }
-        #greet-btn {
-            background-color: #1DB954;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-        #greet-btn:hover {
-            background-color: #17a34a;
-        }
         #greet-msg {
             margin-top: 15px;
             font-size: 1.2em;
@@ -85,7 +71,6 @@
 
 <div id="clock"></div>
 
-<button id="greet-btn">Greet Me!</button>
 <p id="greet-msg"></p>
 
 <script>
@@ -93,6 +78,7 @@
     window.onload = () => {
         document.getElementById("loader").classList.add("hidden");
         document.getElementById("content").style.display = "block";
+        setTimeout(showGreeting, 3000); // Show greeting after 3 seconds
     };
 
     // Typewriter Effect
@@ -117,12 +103,12 @@
     }
     setInterval(updateTime, 1000);
 
-    // Button Greeting
-    document.getElementById('greet-btn').addEventListener('click', () => {
+    // Show greeting after the typewriter effect finishes
+    function showGreeting() {
         const msg = document.getElementById('greet-msg');
         msg.innerText = "Arrey Ab so bhi ja mere bhai ! 🛌";
         msg.style.opacity = 1; // Smooth fade-in
-    });
+    }
 </script>
 
 </body>
