@@ -15,8 +15,124 @@ st.set_page_config(page_title="🧠 SOJA BHAI", layout="wide", initial_sidebar_s
 # Load HTML and CSS with full JS support
 def load_assets():
     try:
-        with open(os.path.join('assets', 'index.html'), 'r', encoding='utf-8') as f:
-            html_content = f.read()
+        # HTML content embedded with Typewriter effect and Clock functionality
+        html_content = """
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+            <style>
+                body {
+                    background-color: #121212;
+                    color: white;
+                    font-family: 'Orbitron', sans-serif;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                    flex-direction: column;
+                    overflow: hidden;
+                }
+                .orbitron-banner {
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+                .orbitron-title {
+                    font-size: 3em;
+                    margin-bottom: 10px;
+                }
+                .orbitron-subtitle {
+                    font-size: 1.5em;
+                    color: cyan;
+                }
+                #clock {
+                    font-size: 1.2em;
+                    margin-bottom: 15px;
+                }
+                #greet-msg {
+                    margin-top: 15px;
+                    font-size: 1.2em;
+                    color: lightgreen;
+                    opacity: 0;
+                    transition: opacity 0.5s ease;
+                }
+                /* Loader Styles */
+                #loader {
+                    border: 5px solid #1DB954;
+                    border-top: 5px solid cyan;
+                    border-radius: 50%;
+                    width: 50px;
+                    height: 50px;
+                    animation: spin 1s linear infinite;
+                    margin-bottom: 20px;
+                }
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+                /* Hide loader after content is ready */
+                #loader.hidden {
+                    display: none;
+                }
+            </style>
+        </head>
+        <body>
+
+        <!-- Loader -->
+        <div id="loader"></div>
+
+        <div class="orbitron-banner" id="content" style="display: none;">
+            <h1 class="orbitron-title">SOJA BHAI 🧠</h1>
+            <p class="orbitron-subtitle" id="typewriter"></p>
+        </div>
+
+        <div id="clock"></div>
+
+        <p id="greet-msg"></p>
+
+        <script>
+            // Show loader until the content is ready
+            window.onload = () => {
+                document.getElementById("loader").classList.add("hidden");
+                document.getElementById("content").style.display = "block";
+                setTimeout(showGreeting, 3000); // Show greeting after 3 seconds
+            };
+
+            // Typewriter Effect
+            const text = "Sleep Tracker • Fatigue Monitor • Performance Booster";
+            let index = 0;
+            const speed = 75;
+
+            function typeWriter() {
+                if (index < text.length) {
+                    document.getElementById("typewriter").innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(typeWriter, speed);
+                }
+            }
+            typeWriter();
+
+            // Real-Time Clock
+            function updateTime() {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString();
+                document.getElementById('clock').innerText = "Current Time: " + timeString;
+            }
+            setInterval(updateTime, 1000);
+
+            // Show greeting after the typewriter effect finishes
+            function showGreeting() {
+                const msg = document.getElementById('greet-msg');
+                msg.innerText = "Arrey Ab so bhi ja mere bhai ! 🛌";
+                msg.style.opacity = 1; // Smooth fade-in
+            }
+        </script>
+
+        </body>
+        </html>
+        """
         # Render the full HTML with JS
         components.html(html_content, height=600)
     except Exception as e:
@@ -146,8 +262,4 @@ if total_deficit > 0:
     st.warning("You're in sleep debt. Complete a challenge to rebuild your sleep habits!")
     if st.button("🎡 Spin the Challenge Wheel"):
         challenge = spin_wheel()
-        st.success(f"Your Challenge: {challenge}")
-        st.image("1.png", width=400)
-
-st.markdown("---")
-st.success("🔋 Consistent sleep = Consistent energy. You’re on the path to mastery!")
+        st.write(f"✅ Challenge: {challenge}")
