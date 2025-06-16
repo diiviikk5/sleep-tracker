@@ -12,10 +12,10 @@ import streamlit.components.v1 as components
 
 st.set_page_config(page_title="🧠 SOJA BHAI", layout="wide", initial_sidebar_state="expanded")
 
-# Load HTML and CSS with full JS support
+
 def load_assets():
     try:
-        # HTML content embedded with Typewriter effect and Clock functionality
+     
         html_content = """
         <!DOCTYPE html>
         <html lang="en">
@@ -133,7 +133,7 @@ def load_assets():
         </body>
         </html>
         """
-        # Render the full HTML with JS
+      
         components.html(html_content, height=600)
     except Exception as e:
         st.error(f"Error loading HTML: {e}")
